@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "870305377998",
+    "project_id": "count-it-firebase",
+    "storage_bucket": "count-it-firebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:870305377998:android:b48bfaef87212043c2aa9f",
+        "android_client_info": {
+          "package_name": "feri.count.it"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "870305377998-4gssb209ottcrh5vbhiguag4ohrhr6dt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtk3vgQgyJ7VrjxExFdx1OVAYffowrkVs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "870305377998-4gssb209ottcrh5vbhiguag4ohrhr6dt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
