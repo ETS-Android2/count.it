@@ -1,6 +1,8 @@
 package feri.count.datalib;
 
 public class Entry {
+    public static final String COLLECTION = "entries";
+
     private String name;
     private String meal;
     private String time;

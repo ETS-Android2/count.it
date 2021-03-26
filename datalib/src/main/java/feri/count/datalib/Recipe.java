@@ -3,6 +3,8 @@ package feri.count.datalib;
 import java.util.ArrayList;
 
 public class Recipe {
+    public static final String COLLECTION = "recipes";
+
     private String name;
     private String instructions;
     private ArrayList<Entry> ingredients;

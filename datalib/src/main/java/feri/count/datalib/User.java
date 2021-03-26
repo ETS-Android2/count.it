@@ -1,6 +1,8 @@
 package feri.count.datalib;
 
 public class User {
+    public static final String COLLECTION = "users";
+    private String id;
     private String username;
     private String email;
     private String password;
@@ -15,6 +17,14 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
+    }
+
+    public String getId() {
+        return this.id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getUsername() {
