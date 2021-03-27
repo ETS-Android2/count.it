@@ -52,6 +52,65 @@ public class RegisterActivity extends AppCompatActivity {
     private ArrayList<User> listOfUsers = new ArrayList<>();
     private ChildEventListener userDataListener;
 
+    private void bindGui() {
+        buttonBack = (Button) findViewById(R.id.buttonBack);
+        buttonRegisterUser = (Button) findViewById(R.id.buttonRegisterUser);
+
+        edtEmail = (EditText) findViewById(R.id.edtEmail);
+        edtUsername = (EditText) findViewById(R.id.edtUsername);
+        edtPassword = (EditText) findViewById(R.id.edtPassword);
+    }
+
+    private void initData() {
+        db = FirebaseDatabase.getInstance().getReference();
+        initUserDataListener();
+        db.child(User.COLLECTION).addChildEventListener(userDataListener);
+    }
+
+    private void initUserDataListener() {
+        userDataListener = new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                User data = dataSnapshot.getValue(User.class);
+                data.setId(dataSnapshot.getKey());
+
+                listOfUsers.add(data);
+                Log.i(TAG, "Add:"+dataSnapshot.getKey()+" "+data);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                User data = dataSnapshot.getValue(User.class);
+                data.setId(dataSnapshot.getKey());
+
+                //listOfUsers.put(dataSnapshot.getKey(), data);
+                for(int i = 0; i < listOfUsers.size(); i++) {
+                    if (data.getId().equals(listOfUsers.get(i).getId())) {
+                        listOfUsers.set(i,data);
+                        break;
+                    }
+                }
+
+                Log.i(TAG, "Changed:"+dataSnapshot.getKey()+" "+data);
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                Log.i(TAG, "Removed:"+dataSnapshot.getKey());
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,64 +172,6 @@ public class RegisterActivity extends AppCompatActivity {
         //mDatabase.child(MyDataCars.COLLECTION).addChildEventListener(myDataCarListener);
     }
 
-    private void bindGui() {
-        buttonBack = (Button) findViewById(R.id.buttonBack);
-        buttonRegisterUser = (Button) findViewById(R.id.buttonRegisterUser);
-
-        edtEmail = (EditText) findViewById(R.id.edtEmail);
-        edtUsername = (EditText) findViewById(R.id.edtUsername);
-        edtPassword = (EditText) findViewById(R.id.edtPassword);
-    }
-
-    private void initData() {
-        db = FirebaseDatabase.getInstance().getReference();
-        initUserDataListener();
-        db.child(User.COLLECTION).addChildEventListener(userDataListener);
-    }
-
-    private void initUserDataListener() {
-        userDataListener = new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                User data = dataSnapshot.getValue(User.class);
-                data.setId(dataSnapshot.getKey());
-
-                listOfUsers.add(data);
-                Log.i(TAG, "Add:"+dataSnapshot.getKey()+" "+data);
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                User data = dataSnapshot.getValue(User.class);
-                data.setId(dataSnapshot.getKey());
-
-                //listOfUsers.put(dataSnapshot.getKey(), data);
-                for(int i = 0; i < listOfUsers.size(); i++) {
-                    if (data.getId().equals(listOfUsers.get(i).getId())) {
-                        listOfUsers.set(i,data);
-                        break;
-                    }
-                }
-
-                Log.i(TAG, "Changed:"+dataSnapshot.getKey()+" "+data);
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                Log.i(TAG, "Removed:"+dataSnapshot.getKey());
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        };
-    }
 
 
     public void returnToLoginActivity(int wasUserRegistered) {
@@ -218,7 +219,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         if(! (passwordPattern.matcher(password)).matches()) {
-            Toast.makeText(getBaseContext(), "Vnesite lozinku z 8 do 20 znakov, vsaj 1 števko, vsaj 1 veliko črko, vsaj 1 malo črko in vsaj 1 specijalni znac (brez razmakov)", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getBaseContext(), "Vnesite geslo z 8 do 20 znakov, vsaj 1 števko, vsaj 1 veliko črko, vsaj 1 malo črko in vsaj 1 specijalni znac (brez razmakov)", Toast.LENGTH_SHORT).show();
             return;
         }
 
