@@ -28,8 +28,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 import java.util.regex.Pattern;
@@ -57,7 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
         buttonRegisterUser = (Button) findViewById(R.id.buttonRegisterUser);
 
         edtEmail = (EditText) findViewById(R.id.edtEmail);
-        edtUsername = (EditText) findViewById(R.id.edtUsername);
+        edtUsername = (EditText) findViewById(R.id.edtEmailLog);
         edtPassword = (EditText) findViewById(R.id.edtPassword);
     }
 

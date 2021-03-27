@@ -63,13 +63,13 @@
             app:layout_constraintGuide_percent="0.14" />
 
         <EditText
-            android:id="@+id/edtUsername"
+            android:id="@+id/edtEmailLog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:ems="10"
-            android:hint="Username"
-            android:inputType="textPersonName"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
             android:textColor="@color/crimson"
             app:backgroundTint="@color/crimson"
             app:layout_constraintStart_toStartOf="@+id/guideline_v"
@@ -86,7 +86,7 @@
             android:textColor="@color/crimson"
             app:backgroundTint="@color/crimson"
             app:layout_constraintStart_toStartOf="@+id/guideline_v"
-            app:layout_constraintTop_toBottomOf="@+id/edtUsername" />
+            app:layout_constraintTop_toBottomOf="@+id/edtEmailLog" />
 
         <Button
             android:id="@+id/buttonLoginUser"
