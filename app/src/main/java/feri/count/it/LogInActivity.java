@@ -174,12 +174,12 @@ public class LogInActivity extends AppCompatActivity {
                 password = this.edtPassword.getText().toString();
 
         if(TextUtils.isEmpty(email)){
-            Toast.makeText(getBaseContext(), "email is required input field", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getBaseContext(), "E-mail is a required input field!", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if(TextUtils.isEmpty(password)){
-            Toast.makeText(getBaseContext(), "password is required input field", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getBaseContext(), "Password is a required input field!", Toast.LENGTH_SHORT).show();
             return;
         }
 

@@ -234,27 +234,27 @@ public class RegisterActivity extends AppCompatActivity {
                 passwordPattern = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,20}$");
 
         if (email.isEmpty()) {
-            Toast.makeText(getBaseContext(), "e-mail is required input field", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getBaseContext(), "E-mail is a required input field!", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (username.isEmpty()) {
-            Toast.makeText(getBaseContext(), "username is required input field", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getBaseContext(), "Username is a required input field!", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if(password.isEmpty()) {
-            Toast.makeText(getBaseContext(), "password is required input field", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getBaseContext(), "Password is a required input field!", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if(! (emailPattern.matcher(email)).matches()) {
-            Toast.makeText(getBaseContext(), "Vnesite validni e-mail naslov", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getBaseContext(), "Please enter a valid e-mail address!", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if(! (passwordPattern.matcher(password)).matches()) {
-            Toast.makeText(getBaseContext(), "Vnesite geslo z 8 do 20 znakov, vsaj 1 števko, vsaj 1 veliko črko, vsaj 1 malo črko in vsaj 1 specijalni znac (brez razmakov)", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getBaseContext(), "Please enter a password that is 8-20 characters long, containing at least one lowercase letter, one uppercase letter, one number and one special character (with no white spaces)!", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -262,7 +262,7 @@ public class RegisterActivity extends AppCompatActivity {
         user.setId(UUID.randomUUID().toString());
 
         if(doesUserAlreadyExistInDb(user)) {
-            Toast.makeText(getBaseContext(), "Uporabnik z uporabniškim imenom ali e-naslovom že obstaja v bazi podatkov", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getBaseContext(), "A user with that username or e-mail address already exists in the database!", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -270,13 +270,13 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onSuccess(Void aVoid) {
                 returnToLoginActivity(1);
-                Log.i(TAG,"new user successfully added to database");
+                Log.i(TAG,"New user successfully added to database");
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 returnToLoginActivity(0);
-                Log.i(TAG,"user not registered (FAILED!!!)");
+                Log.i(TAG,"User not registered (FAILED!!!)");
             }
         });
 
