@@ -149,6 +149,7 @@ public class LogInActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         bindGui();
+        initData();
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
