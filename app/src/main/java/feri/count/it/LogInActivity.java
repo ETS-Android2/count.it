@@ -166,13 +166,13 @@ public class LogInActivity extends AppCompatActivity {
         });
 
         mAuth = FirebaseAuth.getInstance();
-
     }
 
     public void LoginUser(View view){
         String email = this.edtEmail.getText().toString(),
                 password = this.edtPassword.getText().toString();
 
+//        Log.w(TAG, "createUserWithEmail:failure   " + password);
         if(TextUtils.isEmpty(email)){
             Toast.makeText(getBaseContext(), "E-mail is a required input field!", Toast.LENGTH_SHORT).show();
             return;
@@ -192,6 +192,7 @@ public class LogInActivity extends AppCompatActivity {
                    Toast.makeText(LogInActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
 //                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 }else{
+                    Log.w(TAG, "createUserWithEmail:failure", task.getException());
                     Toast.makeText(getBaseContext(), "Error logging in! ", Toast.LENGTH_SHORT).show();
                 }
             }

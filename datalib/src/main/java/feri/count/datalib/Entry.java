@@ -62,7 +62,7 @@ public class Entry {
         this.quantity += 1;
     }
 
-    public void dencrementQuantity(){
+    public void decrementQuantity(){
         this.quantity -= 1;
     }
 

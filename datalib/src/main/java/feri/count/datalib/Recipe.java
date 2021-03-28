@@ -93,6 +93,6 @@ public class Recipe {
         if(ingredients.remove(findEntry(entry)).getQuantity() - 1 == 0)
             ingredients.remove(findEntry(entry));
         else
-            ingredients.remove(findEntry(entry)).dencrementQuantity();
+            ingredients.remove(findEntry(entry)).decrementQuantity();
     }
 }

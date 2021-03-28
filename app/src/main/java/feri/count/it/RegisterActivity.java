@@ -254,11 +254,11 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         if(! (passwordPattern.matcher(password)).matches()) {
-            Toast.makeText(getBaseContext(), "Please enter a password that is 8-20 characters long, containing at least one lowercase letter, one uppercase letter, one number and one special character (with no white spaces)!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getBaseContext(), "Please enter a password that is 8-20 characters long, containing at least one number, one lowercase letter, one uppercase and one special character (with no white spaces)!", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        User user = new User(email, username, password);
+        User user = new User(username, email, password);
         user.setId(UUID.randomUUID().toString());
 
         if(doesUserAlreadyExistInDb(user)) {
