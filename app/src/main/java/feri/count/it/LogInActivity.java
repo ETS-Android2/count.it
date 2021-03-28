@@ -145,6 +145,7 @@ public class LogInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        transparentStatusAndNavigation();
         getSupportActionBar().hide();
 
         bindGui();
@@ -164,7 +165,7 @@ public class LogInActivity extends AppCompatActivity {
         });
 
         mAuth = FirebaseAuth.getInstance();
-        transparentStatusAndNavigation();
+
     }
 
     public void LoginUser(View view){
