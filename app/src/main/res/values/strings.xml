@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Count.it</string>
+    <string name="title_activity_menu">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_entry">Add entry</string>
+    <string name="title_account">Account</string>
 </resources>

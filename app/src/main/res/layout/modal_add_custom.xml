@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/white_round_corners_backround"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Custom Entry"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edtNameCustomEntry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:hint="Name"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Carbs : "
+        app:layout_constraintBottom_toBottomOf="@+id/edtCarbs"
+        app:layout_constraintStart_toStartOf="@+id/edtNameCustomEntry"
+        app:layout_constraintTop_toTopOf="@+id/edtCarbs" />
+
+    <EditText
+        android:id="@+id/edtCarbs"
+        android:layout_width="72dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="100"
+        android:inputType="numberSigned"
+        app:layout_constraintEnd_toEndOf="@+id/edtNameCustomEntry"
+        app:layout_constraintTop_toBottomOf="@+id/edtNameCustomEntry" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fats : "
+        app:layout_constraintBottom_toBottomOf="@+id/edtFats"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toTopOf="@+id/edtFats" />
+
+    <EditText
+        android:id="@+id/edtFats"
+        android:layout_width="72dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="100"
+        android:inputType="numberSigned"
+        app:layout_constraintStart_toStartOf="@+id/edtCarbs"
+        app:layout_constraintTop_toBottomOf="@+id/edtCarbs" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Protein : "
+        app:layout_constraintBottom_toBottomOf="@+id/editTextNumberSigned3"
+        app:layout_constraintStart_toStartOf="@+id/textView3"
+        app:layout_constraintTop_toTopOf="@+id/editTextNumberSigned3" />
+
+    <EditText
+        android:id="@+id/editTextNumberSigned3"
+        android:layout_width="72dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="100"
+        android:inputType="numberSigned"
+        app:layout_constraintStart_toStartOf="@+id/edtFats"
+        app:layout_constraintTop_toBottomOf="@+id/edtFats" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Calories : "
+        app:layout_constraintBottom_toBottomOf="@+id/edtCalories"
+        app:layout_constraintStart_toStartOf="@+id/textView4"
+        app:layout_constraintTop_toTopOf="@+id/edtCalories" />
+
+    <EditText
+        android:id="@+id/edtCalories"
+        android:layout_width="72dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="100"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toStartOf="@+id/editTextNumberSigned3"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNumberSigned3" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/round_button_style"
+        android:text="ADD"
+        app:backgroundTint="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtCalories" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

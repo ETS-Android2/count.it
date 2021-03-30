@@ -1,28 +1,37 @@
 package feri.count.datalib;
 
+import java.util.ArrayList;
+
 public class Entry {
     public static final String COLLECTION = "entries";
+    public static final int SERVING = 100;
 
     private String name;
+    private ArrayList<String> mealTypes;
     private String meal;
     private String time;
     private double quantity;
     private double carbs;
     private double protein;
     private double fats;
+    private double calories;
     private boolean custom;
 
     public Entry() {
     }
 
-    public Entry(String name, String meal, String time, double quantity, double carbs, double protein, double fats, boolean custom) {
+    public Entry(String name, ArrayList<String> mealTypes, String meal, String time,
+                 double quantity, double carbs, double protein, double fats, double calories,
+                 boolean custom) {
         this.name = name;
+        this.mealTypes = mealTypes;
         this.meal = meal;
         this.time = time;
         this.quantity = quantity;
         this.carbs = carbs;
         this.protein = protein;
         this.fats = fats;
+        this.calories = calories;
         this.custom = custom;
     }
 
@@ -42,6 +51,14 @@ public class Entry {
         this.meal = meal;
     }
 
+    public ArrayList<String> getMealTypes() {
+        return mealTypes;
+    }
+
+    public void setMealTypes(ArrayList<String> mealTypes) {
+        this.mealTypes = mealTypes;
+    }
+
     public String getTime() {
         return time;
     }
@@ -59,11 +76,13 @@ public class Entry {
     }
 
     public void incrementQuantity(){
-        this.quantity += 1;
+        quantity += 1;
+        calories += calories;
     }
 
     public void decrementQuantity(){
-        this.quantity -= 1;
+        quantity -= 1;
+        calories -= calories;
     }
 
     public double getCarbs() {
@@ -88,6 +107,14 @@ public class Entry {
 
     public void setFats(double fats) {
         this.fats = fats;
+    }
+
+    public double getCalories() {
+        return calories;
+    }
+
+    public void setCalories(double calories) {
+        this.calories = calories;
     }
 
     public boolean isCustom() {

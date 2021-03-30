@@ -1,4 +1,4 @@
-package feri.count.it;
+package feri.count.it.activities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,6 +31,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 import feri.count.datalib.User;
+import feri.count.it.R;
 
 public class LogInActivity extends AppCompatActivity {
     public static final String TAG = LogInActivity.class.getSimpleName();

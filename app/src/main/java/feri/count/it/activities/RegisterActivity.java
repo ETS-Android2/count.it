@@ -1,4 +1,4 @@
-package feri.count.it;
+package feri.count.it.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -37,6 +37,7 @@ import java.util.UUID;
 import java.util.regex.Pattern;
 
 import feri.count.datalib.User;
+import feri.count.it.R;
 
 public class RegisterActivity extends AppCompatActivity {
     public static final String TAG = RegisterActivity.class.getSimpleName();

@@ -10,7 +10,7 @@
     <color name="blue_sapphire">#175676</color>
     <color name="maximum_blue">#4BA3C3</color>
     <color name="colombia_blue">#CCE6F4</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
     <color name="transparent">#0000</color>
 </resources>
