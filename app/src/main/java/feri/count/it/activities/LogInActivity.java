@@ -191,7 +191,11 @@ public class LogInActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                    Toast.makeText(LogInActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
-//                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//                    HEY GORAN!
+//                    I ADDED THIS LINE OF CODE
+//                    WHEN YOU START THE APP IT WILL ATOMATICALLY START AT THE MAIN ACTIVITY
+//                    THAT'S BECAUSE IN THE MANIFESTS IT'S THE MAIN INTENT
+                    startActivity(new Intent(getApplicationContext(), MenuActivity.class));
                 }else{
                     Log.w(TAG, "createUserWithEmail:failure", task.getException());
                     Toast.makeText(getBaseContext(), "Error logging in! ", Toast.LENGTH_SHORT).show();
