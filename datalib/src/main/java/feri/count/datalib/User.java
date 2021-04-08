@@ -82,4 +82,16 @@ public class User {
     public void setDiet(String diet) {
         this.diet = diet;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        return this.email.equals(user.getEmail()) && this.username.equals(user.getUsername());
+    }
+
 }

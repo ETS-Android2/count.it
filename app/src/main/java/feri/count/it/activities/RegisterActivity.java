@@ -78,7 +78,8 @@ public class RegisterActivity extends AppCompatActivity {
                 data.setId(dataSnapshot.getKey());
 
                 listOfUsers.add(data);
-                Log.i(TAG, "Add:"+dataSnapshot.getKey()+" "+data);
+
+                Log.i(TAG, "Add:" + dataSnapshot.getKey() + " " + data.getUsername() + ", email: " + data.getEmail());
             }
 
             @Override
