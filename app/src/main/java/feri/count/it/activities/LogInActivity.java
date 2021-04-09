@@ -156,6 +156,12 @@ public class LogInActivity extends AppCompatActivity {
         bindGui();
         initData();
 
+
+//        for(int i = 0; i < listOfUsers.size(); i++) {
+//            Log.i(TAG, "NikolaNikola"+listOfUsers.get(i).toString());
+////            System.out.println();
+//        }
+
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -173,6 +179,16 @@ public class LogInActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
     }
 
+    private boolean checkIfUserIsRegistered() {
+        for(int i = 0; i < listOfUsers.size(); i++) {
+            Log.w(TAG, "email input:  " + edtEmail.getText().toString() + ", password input:   " + edtPassword.getText().toString());
+            if (edtEmail.getText().toString().equals(listOfUsers.get(i).getEmail()) || edtPassword.getText().toString().equals(listOfUsers.get(i).getPassword())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void LoginUser(View view){
         String email = this.edtEmail.getText().toString(),
                 password = this.edtPassword.getText().toString();
@@ -188,24 +204,28 @@ public class LogInActivity extends AppCompatActivity {
             return;
         }
 
-        //authenticate user
+        // CALL FUNCTION TO LIST THROUGH EXISTING USERS AND SEE IF INPUT EMAIL&PASSWORD ARE CORRECT
+        if(checkIfUserIsRegistered()){
+            Toast.makeText(LogInActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(getApplicationContext(), MenuActivity.class));
+        }else{
+            Toast.makeText(getBaseContext(), "User does not exist!", Toast.LENGTH_SHORT).show();
+        }
 
-        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                   Toast.makeText(LogInActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
-//                    HEY GORAN!
-//                    I ADDED THIS LINE OF CODE
-//                    WHEN YOU START THE APP IT WILL ATOMATICALLY START AT THE MAIN ACTIVITY
-//                    THAT'S BECAUSE IN THE MANIFESTS IT'S THE MAIN INTENT
-                    startActivity(new Intent(getApplicationContext(), MenuActivity.class));
-                }else{
-                    Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                    Toast.makeText(getBaseContext(), "Error logging in! ", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+        //authenticate user
+//        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//            @Override
+//            public void onComplete(@NonNull Task<AuthResult> task) {
+//                if(task.isSuccessful()){
+//                   Toast.makeText(LogInActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
+//
+//                    startActivity(new Intent(getApplicationContext(), MenuActivity.class));
+//                }else{
+//                    Log.w(TAG, "createUserWithEmail:failure", task.getException());
+//                    Toast.makeText(getBaseContext(), "Error logging in! ", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
     }
 
     public void openRegisterActivity(View view) {
