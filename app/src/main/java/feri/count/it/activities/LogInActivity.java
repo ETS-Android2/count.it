@@ -111,6 +111,8 @@ public class LogInActivity extends AppCompatActivity {
         };
     }
 
+    //Ahamadullah Saikat, stack overflow
+    // https://stackoverflow.com/questions/29069070/completely-transparent-status-bar-and-navigation-bar-on-lollipop#31596735
     private void transparentStatusAndNavigation() {
         //make full transparent statusBar
         if (Build.VERSION.SDK_INT >= 19 && Build.VERSION.SDK_INT < 21) {
