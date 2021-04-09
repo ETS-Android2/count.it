@@ -64,12 +64,14 @@ public class RegisterActivity extends AppCompatActivity {
         edtPassword = (EditText) findViewById(R.id.edtPassword);
     }
 
+    // KODA IZDELANA PO VZORU NA PREDAVANJE "REALNOČASOVNA BAZA" IZ PREDMETA "PLATFORMNO ODVISEN RAZVOJ APLIKACIJ" - AVTOR: MATEJ ČREPINŠEK
     private void initData() {
         db = FirebaseDatabase.getInstance().getReference();
         initUserDataListener();
         db.child(User.COLLECTION).addChildEventListener(userDataListener);
     }
 
+    // KODA IZDELANA PO VZORU NA PREDAVANJE "REALNOČASOVNA BAZA" IZ PREDMETA "PLATFORMNO ODVISEN RAZVOJ APLIKACIJ" - AVTOR: MATEJ ČREPINŠEK
     private void initUserDataListener() {
         userDataListener = new ChildEventListener() {
             @Override
@@ -176,6 +178,7 @@ public class RegisterActivity extends AppCompatActivity {
         win.setAttributes(winParams);
     }
 
+    // KODA IZDELANA PO VZORU NA PREDAVANJE "REALNOČASOVNA BAZA" IZ PREDMETA "PLATFORMNO ODVISEN RAZVOJ APLIKACIJ" - AVTOR: MATEJ ČREPINŠEK
     @Override
     public void onStart() {
         super.onStart();
@@ -198,6 +201,7 @@ public class RegisterActivity extends AppCompatActivity {
         else updateUI(currentUser);
     }
 
+    // KODA IZDELANA PO VZORU NA PREDAVANJE "REALNOČASOVNA BAZA" IZ PREDMETA "PLATFORMNO ODVISEN RAZVOJ APLIKACIJ" - AVTOR: MATEJ ČREPINŠEK
     private void updateUI(FirebaseUser currentUser) {
         Log.i("TAG","User:" + currentUser.getEmail());
         db = FirebaseDatabase.getInstance().getReference();

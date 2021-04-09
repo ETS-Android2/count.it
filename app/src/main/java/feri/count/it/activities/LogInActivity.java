@@ -59,12 +59,14 @@ public class LogInActivity extends AppCompatActivity {
         edtPassword = (EditText) findViewById(R.id.edtPassword);
     }
 
+    // KODA IZDELANA PO VZORU NA PREDAVANJE "REALNOČASOVNA BAZA" IZ PREDMETA "PLATFORMNO ODVISEN RAZVOJ APLIKACIJ" - AVTOR: MATEJ ČREPINŠEK
     private void initData() {
         db = FirebaseDatabase.getInstance().getReference();
         initUserDataListener();
         db.child(User.COLLECTION).addChildEventListener(userDataListener);
     }
 
+    // KODA IZDELANA PO VZORU NA PREDAVANJE "REALNOČASOVNA BAZA" IZ PREDMETA "PLATFORMNO ODVISEN RAZVOJ APLIKACIJ" - AVTOR: MATEJ ČREPINŠEK
     private void initUserDataListener() {
         userDataListener = new ChildEventListener() {
             @Override
@@ -202,9 +204,6 @@ public class LogInActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-
     }
 
     public void openRegisterActivity(View view) {
