@@ -156,12 +156,6 @@ public class LogInActivity extends AppCompatActivity {
         bindGui();
         initData();
 
-
-//        for(int i = 0; i < listOfUsers.size(); i++) {
-//            Log.i(TAG, "NikolaNikola"+listOfUsers.get(i).toString());
-////            System.out.println();
-//        }
-
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -179,6 +173,7 @@ public class LogInActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
     }
 
+    //CHECKING IF INPUT FIELDS EXISTS IN LIST OF USERS
     private boolean checkIfUserIsRegistered() {
         for(int i = 0; i < listOfUsers.size(); i++) {
             Log.w(TAG, "email input:  " + edtEmail.getText().toString() + ", password input:   " + edtPassword.getText().toString());
@@ -189,6 +184,7 @@ public class LogInActivity extends AppCompatActivity {
         return false;
     }
 
+    //MATERIAL FROM : YouTube "https://www.youtube.com/watch?v=Z-RE1QuUWPg" AND "https://youtu.be/KB2BIm_m1Os"
     public void LoginUser(View view){
         String email = this.edtEmail.getText().toString(),
                 password = this.edtPassword.getText().toString();
