@@ -20,7 +20,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.firebase.ui.auth.AuthUI;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -31,21 +30,15 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.DocumentReference;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 import java.util.regex.Pattern;
 
 import feri.count.datalib.User;
 import feri.count.it.R;
 import feri.count.it.activities.MenuActivity;
-import feri.count.it.activities.RegisterActivity;
 
 public class AccountFragment extends Fragment {
     public static final String TAG = AccountFragment.class.getSimpleName();
@@ -74,7 +67,7 @@ public class AccountFragment extends Fragment {
         edtUsername = (EditText) view.findViewById(R.id.edtUsernameAccount);
         edtCurrentWeight = (EditText) view.findViewById(R.id.edtWeightAccount);
         switchWeightLoss = (Switch) view.findViewById(R.id.switch2);
-        checkBoxVegan = (CheckBox) view.findViewById(R.id.checkBoxVegan);
+        checkBoxVegan = (CheckBox) view.findViewById(R.id.checkBoxDiet);
         checkBoxVegetarian = (CheckBox) view.findViewById(R.id.checkBoxVegeterian);
         checkBoxKeto = (CheckBox) view.findViewById(R.id.checkBoxKeto);
     }
