@@ -1,5 +1,8 @@
 package feri.count.datalib;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class User {
     public static final String COLLECTION = "users";
     private String id;
@@ -10,13 +13,17 @@ public class User {
     private boolean weightLoss;
     private double dailyCalories;
     private String diet;
+    private ArrayList<Entry> entries;
 
-    public User() { }
+    public User() {
+        entries = new ArrayList<>();
+    }
 
     public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
+        entries = new ArrayList<>();
     }
 
     public String getId() {
@@ -81,6 +88,34 @@ public class User {
 
     public void setDiet(String diet) {
         this.diet = diet;
+    }
+
+    public ArrayList<Entry> getEntries() {
+        return entries;
+    }
+
+    public void setEntries(ArrayList<Entry> entries) {
+        this.entries = entries;
+    }
+
+    public void addEntry(Entry entry){
+        entries.add(entry);
+    }
+
+    public int findEntry(Entry entry){
+        for (int i = 0; i < entries.size(); i++) {
+            if (entry.getName().equals(entries.get(i).getName())) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public void removeIngredient(Entry entry){
+        if(entries.remove(findEntry(entry)).getQuantity() - 1 == 0)
+            entries.remove(findEntry(entry));
+        else
+            entries.remove(findEntry(entry)).decrementQuantity();
     }
 
     @Override
