@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingTop="10dp"
-    android:paddingBottom="40dp">
+    android:paddingBottom="40dp"
+    android:id="@+id/item_entry_layout"
+    >
 
     <TextView
         android:id="@+id/txtName"

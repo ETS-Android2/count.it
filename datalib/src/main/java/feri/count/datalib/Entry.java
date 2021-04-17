@@ -6,9 +6,9 @@ public class Entry {
     public static final String COLLECTION = "entries";
     public static final int SERVING = 100;
 
+    private String id;
     private String name;
     private ArrayList<String> mealTypes;
-    private ArrayList<String> dietTypes;
     private String meal;
     private String date;
     private String time;
@@ -20,17 +20,13 @@ public class Entry {
     private boolean custom;
 
     public Entry() {
-        mealTypes = new ArrayList<>();
-        dietTypes = new ArrayList<>();
-        custom = false;
     }
 
-    public Entry(String name, ArrayList<String> mealTypes, ArrayList<String> dietTypes, String meal, String date, String time,
+    public Entry(String name, ArrayList<String> mealTypes, String meal, String date, String time,
                  double quantity, double carbs, double protein, double fats, double calories,
                  boolean custom) {
         this.name = name;
         this.mealTypes = mealTypes;
-        this.dietTypes = dietTypes;
         this.meal = meal;
         this.time = time;
         this.date = date;
@@ -40,6 +36,14 @@ public class Entry {
         this.fats = fats;
         this.calories = calories;
         this.custom = custom;
+    }
+
+    public String getId() {
+        return this.id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -64,14 +68,6 @@ public class Entry {
 
     public void setMealTypes(ArrayList<String> mealTypes) {
         this.mealTypes = mealTypes;
-    }
-
-    public ArrayList<String> getDietTypes() {
-        return dietTypes;
-    }
-
-    public void setDietTypes(ArrayList<String> dietTypes) {
-        this.dietTypes = dietTypes;
     }
 
     public String getDate() {
@@ -146,5 +142,25 @@ public class Entry {
 
     public void setCustom(boolean custom) {
         this.custom = custom;
+    }
+
+    @Override
+    public String toString() {
+        String ret =  this.id + ";"
+                + name + ";"
+                + meal + ";"
+                + date + ";"
+                + time + ";"
+                + String.valueOf(quantity) + ";"
+                + String.valueOf(carbs) + ";"
+                + String.valueOf(protein) + ";"
+                + String.valueOf(fats) + ";"
+                + String.valueOf(calories) + ";"
+                + String.valueOf(custom) + ";";
+
+        for(int i = 0; i < mealTypes.size(); i++)
+            ret += mealTypes.get(i).toString() + ";";
+
+        return ret;
     }
 }
