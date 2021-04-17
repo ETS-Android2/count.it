@@ -17,11 +17,11 @@ import feri.count.it.R;
 import feri.count.it.activities.MenuActivity;
 import feri.count.it.fragments.EntryFragment;
 
-public class FilterModal extends DialogFragment {
-    public static final String TAG = FilterModal.class.getSimpleName();
+public class TagModal extends DialogFragment {
+    public static final String TAG = TagModal.class.getSimpleName();
 
-    public static FilterModal newInstance() {
-        FilterModal frag = new FilterModal();
+    public static TagModal newInstance() {
+        TagModal frag = new TagModal();
         return frag;
     }
 
@@ -30,7 +30,7 @@ public class FilterModal extends DialogFragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.modal_filter, null);
+        View view = inflater.inflate(R.layout.modal_tag, null);
 
 
         builder.setView(view);
@@ -43,9 +43,6 @@ public class FilterModal extends DialogFragment {
             public void onClick(View v) {
                 Log.i(TAG, "i was clicked!!");
                 dismiss();
-
-                //fragmentManager.beginTransaction().remove(f).commit();
-                //finish();
             }
         });
 

@@ -36,12 +36,14 @@ import feri.count.it.R;
 import feri.count.it.activities.MenuActivity;
 import feri.count.it.adapters.EntryAdapter;
 import feri.count.it.modals.FilterModal;
+import feri.count.it.modals.TagModal;
 
 public class EntryFragment extends Fragment {
     public static final String TAG = EntryFragment.class.getSimpleName();
 
     private EditText edtSearch;
     private Button buttonSearch;
+    private Button buttonTag;
     private Button btnOpenFilterModal;
     private RecyclerView recyclerViewFood;
 
@@ -61,6 +63,7 @@ public class EntryFragment extends Fragment {
     private void bindGui(View view) {
         edtSearch = (EditText) view.findViewById(R.id.edtSearch);
         buttonSearch = (Button) view.findViewById(R.id.buttonSearch);
+        buttonTag = (Button) view.findViewById(R.id.buttonTag);
         btnOpenFilterModal = (Button) view.findViewById(R.id.buttonFilter);
         recyclerViewFood = (RecyclerView) view.findViewById(R.id.recyclerViewFood);
     }
@@ -127,6 +130,13 @@ public class EntryFragment extends Fragment {
             }
         });
 
+        buttonTag.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openTagModal();
+            }
+        });
+
         btnOpenFilterModal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -144,6 +154,11 @@ public class EntryFragment extends Fragment {
     public void openFilterModal() {
         FilterModal modal = FilterModal.newInstance();
         modal.show(getFragmentManager(), FilterModal.TAG);
+    }
+
+    public void openTagModal() {
+        TagModal modal = TagModal.newInstance();
+        modal.show(getFragmentManager(), TagModal.TAG);
     }
 
     @Override
