@@ -8,6 +8,7 @@ public class Entry {
 
     private String name;
     private ArrayList<String> mealTypes;
+    private ArrayList<String> dietTypes;
     private String meal;
     private String date;
     private String time;
@@ -19,13 +20,17 @@ public class Entry {
     private boolean custom;
 
     public Entry() {
+        mealTypes = new ArrayList<>();
+        dietTypes = new ArrayList<>();
+        custom = false;
     }
 
-    public Entry(String name, ArrayList<String> mealTypes, String meal, String date, String time,
+    public Entry(String name, ArrayList<String> mealTypes, ArrayList<String> dietTypes, String meal, String date, String time,
                  double quantity, double carbs, double protein, double fats, double calories,
                  boolean custom) {
         this.name = name;
         this.mealTypes = mealTypes;
+        this.dietTypes = dietTypes;
         this.meal = meal;
         this.time = time;
         this.date = date;
@@ -59,6 +64,14 @@ public class Entry {
 
     public void setMealTypes(ArrayList<String> mealTypes) {
         this.mealTypes = mealTypes;
+    }
+
+    public ArrayList<String> getDietTypes() {
+        return dietTypes;
+    }
+
+    public void setDietTypes(ArrayList<String> dietTypes) {
+        this.dietTypes = dietTypes;
     }
 
     public String getDate() {
