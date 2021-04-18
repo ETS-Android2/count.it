@@ -1,5 +1,7 @@
 package feri.count.it.fragments;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -70,6 +72,17 @@ public class EntryFragment extends Fragment {
 
     private CountItApplication app;
 
+    private boolean isSelectedVegan;
+    private boolean isSelectedVegetarian;
+    private boolean isSelectedKeto;
+    private boolean isSelectedRecipe;
+    private boolean isSelectedFood;
+
+    private boolean isSelectedBreakfast;
+    private boolean isSelectedLunch;
+    private boolean isSelectedDinner;
+    private boolean isSelectedSnack;
+
     private void bindGui(View view) {
         edtSearch = (EditText) view.findViewById(R.id.edtSearch);
         buttonSearch = (Button) view.findViewById(R.id.buttonSearch);
@@ -87,13 +100,21 @@ public class EntryFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot ds: snapshot.getChildren()) {
+                    boolean displayCurrentRecord = true;
                     Entry data = ds.getValue(Entry.class);
 
                     if(searchString != "") {
                         if (data.toString().contains(searchString))
-                            listOfEntries.add(data);
+                            displayCurrentRecord = true;
+                        else
+                            displayCurrentRecord = false;
                     }
                     else
+                        displayCurrentRecord = true;
+
+                    //if(displayCurrentRecord && isSelectedVegan && data.get)
+
+                    if(displayCurrentRecord)
                         listOfEntries.add(data);
                 }
 
@@ -173,12 +194,72 @@ public class EntryFragment extends Fragment {
     }
 
     public void openFilterModal() {
-        FilterModal modal = FilterModal.newInstance();
+        FilterModal modal = FilterModal.newInstance(isSelectedVegan || isSelectedVegetarian || isSelectedKeto, isSelectedRecipe, isSelectedFood);
+
+        modal.builder = new AlertDialog.Builder(getActivity());
+        modal.inflater = getActivity().getLayoutInflater();
+        modal.view = modal.inflater.inflate(R.layout.modal_filter, null);
+
+        modal.builder.setView(modal.view);
+        modal.dialog = modal.builder.create();
+
+        modal.bindGui(modal.view);
+        modal.displayDataInGui();
+
+        modal.btnApply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                modal.setSelectedOptionsFromForm();
+
+                isSelectedVegan = modal.isSelectedDiet() && app.getLoggedUser() != null && app.getLoggedUser().getDiet().toLowerCase().equals("vegan");
+                isSelectedVegetarian = modal.isSelectedDiet() && app.getLoggedUser() != null && app.getLoggedUser().getDiet().toLowerCase().equals("vegetarian");
+                isSelectedKeto = modal.isSelectedDiet() && app.getLoggedUser() != null && app.getLoggedUser().getDiet().toLowerCase().equals("keto");
+                isSelectedRecipe = modal.isSelectedRecipes();
+                isSelectedFood = modal.isSelectedFood();
+
+                Log.i(TAG, "vegan: " + isSelectedVegan + ", vegetarian: " + isSelectedVegetarian + ", keto: " + isSelectedKeto + ", recipe: " + isSelectedRecipe + ", food: " + isSelectedFood);
+
+                initRecyclerView();
+
+                modal.dismiss();
+            }
+        });
+
         modal.show(getFragmentManager(), FilterModal.TAG);
     }
 
     public void openTagModal() {
-        TagModal modal = TagModal.newInstance();
+
+        TagModal modal = TagModal.newInstance(isSelectedBreakfast, isSelectedLunch, isSelectedDinner, isSelectedSnack);
+
+        modal.builder = new AlertDialog.Builder(getActivity());
+        modal.inflater = getActivity().getLayoutInflater();
+        modal.view = modal.inflater.inflate(R.layout.modal_tag, null);
+
+        modal.builder.setView(modal.view);
+        modal.dialog = modal.builder.create();
+
+        modal.bindGui(modal.view);
+        modal.displayDataInGui();
+
+        modal.btnApply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                modal.setSelectedOptionsFromForm();
+
+                isSelectedBreakfast = modal.isSelectedBreakfast();
+                isSelectedLunch = modal.isSelectedLunch();
+                isSelectedDinner = modal.isSelectedDinner();
+                isSelectedSnack = modal.isSelectedSnack();
+
+                initRecyclerView();
+
+                Log.i(TAG, "breakfast: " + isSelectedBreakfast + ", lunch: " + isSelectedLunch + ", dinner: " + isSelectedDinner + ", snack: " + isSelectedSnack);
+
+                modal.dismiss();
+            }
+        });
+
         modal.show(getFragmentManager(), TagModal.TAG);
     }
 
