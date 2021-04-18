@@ -45,6 +45,10 @@ public class AddCustomModal extends DialogFragment{
     private CheckBox vegeterian;
     private CheckBox vegan;
     private CheckBox keto;
+    private CheckBox breakfast;
+    private CheckBox lunch;
+    private CheckBox dinner;
+    private CheckBox snack;
     private Button btnAdd;
 
     private FirebaseAuth mAuth;
@@ -59,6 +63,10 @@ public class AddCustomModal extends DialogFragment{
         vegeterian = (CheckBox) view.findViewById(R.id.checkBox);
         vegan = (CheckBox) view.findViewById(R.id.checkBox2);
         keto = (CheckBox) view.findViewById(R.id.checkBox3);
+        breakfast = (CheckBox) view.findViewById(R.id.checkBox4);
+        lunch = (CheckBox) view.findViewById(R.id.checkBox5);
+        dinner = (CheckBox) view.findViewById(R.id.checkBox6);
+        snack= (CheckBox) view.findViewById(R.id.checkBox7);
         btnAdd = (Button) view.findViewById(R.id.button);
     }
 
@@ -132,13 +140,37 @@ public class AddCustomModal extends DialogFragment{
 
                 if(vegan.isChecked()){
                     type += "vegan";
-                }else if(vegeterian.isChecked()){
-                    type += "vegeterian";
-                }else if(keto.isChecked()){
-                    type += "keto";
-                }else {
-                    type += "none";
                 }
+                if(vegeterian.isChecked()){
+                    type += "vegeterian";
+                }
+                if(keto.isChecked()){
+                    type += "keto";
+                }
+                if(type == ""){
+                    type = "none";
+                }
+
+
+                ArrayList<String> mealTypes = new ArrayList<>();
+
+                if(breakfast.isChecked()){
+                    mealTypes.add("Breakfast");
+                }
+                if(lunch.isChecked()){
+                    mealTypes.add("Lunch");
+                }
+                if(dinner.isChecked()){
+                    mealTypes.add("Dinner");
+                }
+                if(snack.isChecked()){
+                    mealTypes.add("Snack");
+                }
+                if(mealTypes.isEmpty()){
+                    mealTypes.add("None");
+//                    Log.i(TAG, "called here");
+                }
+
 
                 Entry newEntry = new Entry();
                 newEntry.setName(name);
@@ -147,7 +179,9 @@ public class AddCustomModal extends DialogFragment{
                 newEntry.setProtein(proteins);
                 newEntry.setCalories(calories);
                 newEntry.setType(type);
+                newEntry.setMealTypes(mealTypes);
                 newEntry.setCustom(true);
+                newEntry.setQuantity(1);
 
 //                Log.i(TAG, "name " + name + "\n" +
 //                        "carbs " + carbs + "\n" +
@@ -157,13 +191,8 @@ public class AddCustomModal extends DialogFragment{
 //                        "calories" + type + "\n"
 //                        );
 
-
-//                String id= db.push().getKey();
-//
-//                db.child(id).setValue(newEntry);
-
                 try{
-                    if(carbs == 0 && calories == 0 && fats == 0 && proteins == 0){
+                    if(carbs == 0 && calories == 0 && fats == 0 && proteins == 0 ){
                         Toast.makeText(getContext(), "Entry not added (FAILED)!", Toast.LENGTH_SHORT).show();
                         Log.i(TAG, "no adding!");
                     }else{
