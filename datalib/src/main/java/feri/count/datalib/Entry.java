@@ -21,6 +21,7 @@ public class Entry {
     private boolean custom;
 
     public Entry() {
+        this.mealTypes = new ArrayList<>();
     }
 
     public Entry(String name, ArrayList<String> mealTypes, String meal, String date, String time, String type,
