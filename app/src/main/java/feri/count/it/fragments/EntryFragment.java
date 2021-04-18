@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -35,6 +36,7 @@ import feri.count.datalib.User;
 import feri.count.it.R;
 import feri.count.it.activities.MenuActivity;
 import feri.count.it.adapters.EntryAdapter;
+import feri.count.it.modals.AddCustomModal;
 import feri.count.it.modals.FilterModal;
 import feri.count.it.modals.TagModal;
 
@@ -45,6 +47,11 @@ public class EntryFragment extends Fragment {
     private Button buttonSearch;
     private Button buttonTag;
     private Button btnOpenFilterModal;
+    private Button buttonRegister2;
+    private Button buttonRegister3;
+    private Button buttonRegister4;
+    private Button buttonRegister5;
+    private FloatingActionButton fabAddCustom;
     private RecyclerView recyclerViewFood;
 
     private EntryAdapter entryAdapter;
@@ -65,6 +72,7 @@ public class EntryFragment extends Fragment {
         buttonSearch = (Button) view.findViewById(R.id.buttonSearch);
         buttonTag = (Button) view.findViewById(R.id.buttonTag);
         btnOpenFilterModal = (Button) view.findViewById(R.id.buttonFilter);
+        fabAddCustom = (FloatingActionButton) view.findViewById(R.id.fabAddCustom);
         recyclerViewFood = (RecyclerView) view.findViewById(R.id.recyclerViewFood);
     }
 
@@ -144,6 +152,14 @@ public class EntryFragment extends Fragment {
             }
         });
 
+        fabAddCustom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Log.i(TAG, "called button search");
+                openAddCustomModal();
+            }
+        });
+
         recyclerViewFood.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         initRecyclerView();
@@ -159,6 +175,11 @@ public class EntryFragment extends Fragment {
     public void openTagModal() {
         TagModal modal = TagModal.newInstance();
         modal.show(getFragmentManager(), TagModal.TAG);
+    }
+
+    public void openAddCustomModal(){
+        AddCustomModal modal = AddCustomModal.newInstance();
+        modal.show(getFragmentManager(), AddCustomModal.TAG);
     }
 
     @Override

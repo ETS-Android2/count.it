@@ -12,6 +12,7 @@ public class Entry {
     private String meal;
     private String date;
     private String time;
+    private String type;
     private double quantity;
     private double carbs;
     private double protein;
@@ -22,7 +23,7 @@ public class Entry {
     public Entry() {
     }
 
-    public Entry(String name, ArrayList<String> mealTypes, String meal, String date, String time,
+    public Entry(String name, ArrayList<String> mealTypes, String meal, String date, String time, String type,
                  double quantity, double carbs, double protein, double fats, double calories,
                  boolean custom) {
         this.name = name;
@@ -30,6 +31,7 @@ public class Entry {
         this.meal = meal;
         this.time = time;
         this.date = date;
+        this.type = type;
         this.quantity = quantity;
         this.carbs = carbs;
         this.protein = protein;
@@ -84,6 +86,14 @@ public class Entry {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String time) {
+        this.type = type;
     }
 
     public double getQuantity() {
@@ -151,6 +161,7 @@ public class Entry {
                 + meal + ";"
                 + date + ";"
                 + time + ";"
+                + type + ";"
                 + String.valueOf(quantity) + ";"
                 + String.valueOf(carbs) + ";"
                 + String.valueOf(protein) + ";"
