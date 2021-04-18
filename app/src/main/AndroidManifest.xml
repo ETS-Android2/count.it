@@ -5,29 +5,25 @@
     <uses-permission android:name="android.premission.INTERNET" />
 
     <application
+        android:name=".application.CountItApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Countit">
-        <activity
-            android:name=".activities.MenuActivity"
-            android:label="@string/title_activity_menu">
+        <activity android:name=".activities.MenuActivity" android:label="@string/title_activity_menu">
+        </activity>
 
+        <activity android:name=".activities.LogInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-        <activity android:name=".activities.LogInActivity">
 
-        </activity>
-        <activity
-            android:name=".activities.RegisterActivity"
-            android:theme="@style/Theme.Countit" />
+        <activity android:name=".activities.RegisterActivity" android:theme="@style/Theme.Countit" />
     </application>
 
 </manifest>

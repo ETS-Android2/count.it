@@ -2,6 +2,7 @@ package feri.count.it.activities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -17,9 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
+import com.google.common.hash.Hashing;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -28,10 +27,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 import feri.count.datalib.User;
 import feri.count.it.R;
+import feri.count.it.application.CountItApplication;
 
 public class LogInActivity extends AppCompatActivity {
     public static final String TAG = LogInActivity.class.getSimpleName();
@@ -49,6 +50,8 @@ public class LogInActivity extends AppCompatActivity {
 
     private ArrayList<User> listOfUsers = new ArrayList<>();
     private ChildEventListener userDataListener;
+
+    private CountItApplication app;
 
 
     private void bindGui() {
@@ -153,6 +156,8 @@ public class LogInActivity extends AppCompatActivity {
         transparentStatusAndNavigation();
         getSupportActionBar().hide();
 
+        this.app = (CountItApplication) getApplication();
+
         bindGui();
         initData();
 
@@ -174,14 +179,20 @@ public class LogInActivity extends AppCompatActivity {
     }
 
     //CHECKING IF INPUT FIELDS EXISTS IN LIST OF USERS
-    private boolean checkIfUserIsRegistered() {
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private User getUserIfIsRegisterred() {
+        final String hashedPassword = Hashing.sha256()
+                .hashString(edtPassword.getText().toString(), StandardCharsets.UTF_8)
+                .toString();
+
         for(int i = 0; i < listOfUsers.size(); i++) {
-            Log.w(TAG, "email input:  " + edtEmail.getText().toString() + ", password input:   " + edtPassword.getText().toString());
-            if (edtEmail.getText().toString().equals(listOfUsers.get(i).getEmail()) || edtPassword.getText().toString().equals(listOfUsers.get(i).getPassword())) {
-                return true;
+            Log.w(TAG, "email input:  " + edtEmail.getText().toString() + ", password input:   " + edtPassword.getText().toString() + ", hashed password: " + hashedPassword);
+            if (edtEmail.getText().toString().equals(listOfUsers.get(i).getEmail()) && hashedPassword.equals(listOfUsers.get(i).getPassword())) {
+                return listOfUsers.get(i);
             }
         }
-        return false;
+
+        return null;
     }
 
     //MATERIAL FROM : YouTube "https://www.youtube.com/watch?v=Z-RE1QuUWPg" AND "https://youtu.be/KB2BIm_m1Os"
@@ -201,7 +212,10 @@ public class LogInActivity extends AppCompatActivity {
         }
 
         // CALL FUNCTION TO LIST THROUGH EXISTING USERS AND SEE IF INPUT EMAIL&PASSWORD ARE CORRECT
-        if(checkIfUserIsRegistered()){
+        User logInUser = getUserIfIsRegisterred();
+
+        if(logInUser != null){
+            app.setLoggedUser(logInUser);
             Toast.makeText(LogInActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(getApplicationContext(), MenuActivity.class));
         }else{

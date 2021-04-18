@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -22,6 +23,7 @@ import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.common.hash.Hashing;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -30,6 +32,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -234,10 +237,13 @@ public class RegisterActivity extends AppCompatActivity {
         return false;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void registerNewUser(View view) {
         String email = this.edtEmail.getText().toString(),
                 username = this.edtUsername.getText().toString(),
-                password = this.edtPassword.getText().toString();
+                password = this.edtPassword.getText().toString(),
+                hashedPassword = Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString();
+
         Pattern emailPattern = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE),
                 passwordPattern = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,20}$");
 
@@ -266,7 +272,7 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
-        User user = new User(username, email, password);
+        User user = new User(username, email, hashedPassword);
         user.setId(UUID.randomUUID().toString());
 
         if(doesUserAlreadyExistInDb(user)) {

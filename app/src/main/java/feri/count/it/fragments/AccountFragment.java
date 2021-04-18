@@ -39,6 +39,7 @@ import java.util.regex.Pattern;
 import feri.count.datalib.User;
 import feri.count.it.R;
 import feri.count.it.activities.MenuActivity;
+import feri.count.it.application.CountItApplication;
 
 public class AccountFragment extends Fragment {
     public static final String TAG = AccountFragment.class.getSimpleName();
@@ -61,6 +62,8 @@ public class AccountFragment extends Fragment {
     private int indexOfUserInList = -1;
     private ChildEventListener userDataListener;
 
+    private CountItApplication app;
+
     private void bindGui(View view) {
         buttonUpdate = (Button) view.findViewById(R.id.button2);
         edtEmail = (EditText) view.findViewById(R.id.edtEmailAccount);
@@ -80,9 +83,9 @@ public class AccountFragment extends Fragment {
         edtUsername.setText(authenticatedUser.getUsername());
         edtCurrentWeight.setText(String.valueOf(authenticatedUser.getWeight()));
         switchWeightLoss.setChecked(authenticatedUser.isWeightLoss());
-        checkBoxVegan.setChecked(authenticatedUser.getDiet() != null && authenticatedUser.getDiet().toLowerCase() == "vegan");
-        checkBoxVegetarian.setChecked(authenticatedUser.getDiet() != null && authenticatedUser.getDiet().toLowerCase() == "vegetarian");
-        checkBoxKeto.setChecked(authenticatedUser.getDiet() != null && authenticatedUser.getDiet().toLowerCase() == "keto");
+        checkBoxVegan.setChecked(authenticatedUser.getDiet() != null && authenticatedUser.getDiet().toLowerCase().equals("vegan"));
+        checkBoxVegetarian.setChecked(authenticatedUser.getDiet() != null && authenticatedUser.getDiet().toLowerCase().equals("vegetarian"));
+        checkBoxKeto.setChecked(authenticatedUser.getDiet() != null && authenticatedUser.getDiet().toLowerCase().equals("keto"));
     }
 
     // KODA IZDELANA PO VZORU NA PREDAVANJE "REALNOČASOVNA BAZA" IZ PREDMETA "PLATFORMNO ODVISEN RAZVOJ APLIKACIJ" - AVTOR: MATEJ ČREPINŠEK
@@ -106,7 +109,7 @@ public class AccountFragment extends Fragment {
 
                 //TODO: replace with user email that he entered in login activity - instance of class ApplicationMy
                 //When found user that is logged in, save his index in list to instance variable indexOfUserInList and show his data in update form
-                if(data.getEmail().equals("viktorijastevanoska@gmail.com")) {
+                if(AccountFragment.this.app.getLoggedUser() != null && data.getEmail().equals(AccountFragment.this.app.getLoggedUser().getEmail())) {
                     indexOfUserInList = listOfUsers.indexOf(data);
                     bindDataToGui();
                 }
@@ -127,7 +130,7 @@ public class AccountFragment extends Fragment {
 
                 //TODO: replace with user email that he entered in login activity
                 //after changing show current users data in update form
-                if(data.getEmail().equals("viktorijastevanoska@gmail.com")) {
+                if(AccountFragment.this.app.getLoggedUser() != null && data.getEmail().equals(AccountFragment.this.app.getLoggedUser().getEmail())) {
                     indexOfUserInList = listOfUsers.indexOf(data);
                     bindDataToGui();
                 }
@@ -161,6 +164,8 @@ public class AccountFragment extends Fragment {
         final ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_account, null);
         transparentStatusAndNavigation();
+
+        this.app = (CountItApplication) getActivity().getApplication();
 
         bindGui(rootView);
 
@@ -236,6 +241,7 @@ public class AccountFragment extends Fragment {
             @Override
             public void onSuccess(Void aVoid) {
                 //subject to change - on successful updating notify user with message
+                AccountFragment.this.app.setLoggedUser(user);
                 Toast.makeText(getActivity(), "User data changed successfully!", Toast.LENGTH_SHORT).show();
                 bindDataToGui();
                 Log.i(TAG,"New user successfully added to database");
