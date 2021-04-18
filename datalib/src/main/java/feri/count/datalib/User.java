@@ -26,6 +26,21 @@ public class User {
         entries = new ArrayList<>();
     }
 
+    public User(User other) {
+        this.id = other.id;
+        this.username = other.username;
+        this.email = other.email;
+        this.password = other.password;
+        this.weight = other.weight;
+        this.weightLoss = other.weightLoss;
+        this.dailyCalories = other.dailyCalories;
+        this.diet = other.diet;
+        this.entries = new ArrayList<>();
+
+        for(int i = 0; i < other.entries.size(); i++)
+            this.entries.add(other.entries.get(i));
+    }
+
     public String getId() {
         return this.id;
     }

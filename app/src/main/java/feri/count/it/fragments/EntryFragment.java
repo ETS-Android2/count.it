@@ -36,6 +36,7 @@ import feri.count.datalib.User;
 import feri.count.it.R;
 import feri.count.it.activities.MenuActivity;
 import feri.count.it.adapters.EntryAdapter;
+import feri.count.it.application.CountItApplication;
 import feri.count.it.modals.AddCustomModal;
 import feri.count.it.modals.FilterModal;
 import feri.count.it.modals.TagModal;
@@ -66,6 +67,8 @@ public class EntryFragment extends Fragment {
     private int indexOfUserInList = -1;
     private ChildEventListener userDataListener;
     private ChildEventListener entryDataListener;
+
+    private CountItApplication app;
 
     private void bindGui(View view) {
         edtSearch = (EditText) view.findViewById(R.id.edtSearch);
@@ -122,6 +125,8 @@ public class EntryFragment extends Fragment {
             ((MenuActivity) requireActivity()).getWindow().setStatusBarColor(getResources().getColor(R.color.maximum_blue));
         }
         ((MenuActivity) requireActivity()).getSupportActionBar().hide();
+
+        this.app = (CountItApplication) getActivity().getApplication();
 
         bindGui(rootView);
 
