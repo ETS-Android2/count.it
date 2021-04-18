@@ -155,6 +155,15 @@ public class Entry {
         this.custom = custom;
     }
 
+    public boolean doesMealTypeContain(String mealType) {
+        for(int i = 0; i < this.mealTypes.size(); i++) {
+            if(this.mealTypes.get(i).toLowerCase().equals(mealType.toLowerCase()))
+                return true;
+        }
+
+        return false;
+    }
+
     @Override
     public String toString() {
         String ret =  this.id + ";"

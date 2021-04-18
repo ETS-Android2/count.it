@@ -103,16 +103,23 @@ public class EntryFragment extends Fragment {
                     boolean displayCurrentRecord = true;
                     Entry data = ds.getValue(Entry.class);
 
-                    if(searchString != "") {
-                        if (data.toString().contains(searchString))
-                            displayCurrentRecord = true;
-                        else
-                            displayCurrentRecord = false;
-                    }
-                    else
-                        displayCurrentRecord = true;
+                    if(searchString != "" && !data.toString().contains(searchString))
+                        displayCurrentRecord = false;
 
-                    //if(displayCurrentRecord && isSelectedVegan && data.get)
+                    // filtering based on tag
+                    if(displayCurrentRecord && isSelectedBreakfast && !data.doesMealTypeContain("breakfast"))
+                        displayCurrentRecord = false;
+
+                    if(displayCurrentRecord && isSelectedLunch && !data.doesMealTypeContain("lunch"))
+                        displayCurrentRecord = false;
+
+                    if(displayCurrentRecord && isSelectedDinner && !data.doesMealTypeContain("dinner"))
+                        displayCurrentRecord = false;
+
+                    if(displayCurrentRecord && isSelectedSnack && !data.doesMealTypeContain("snack"))
+                        displayCurrentRecord = false;
+
+                    //TODO: filtering based on diet type
 
                     if(displayCurrentRecord)
                         listOfEntries.add(data);
