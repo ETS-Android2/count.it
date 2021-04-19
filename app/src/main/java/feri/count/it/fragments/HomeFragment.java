@@ -110,4 +110,5 @@ public class HomeFragment extends Fragment {
         AddCustomModal modal = AddCustomModal.newInstance();
         modal.show(getFragmentManager(), AddCustomModal.TAG);
     }
+
 }

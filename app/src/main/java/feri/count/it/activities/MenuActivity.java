@@ -1,5 +1,6 @@
 package feri.count.it.activities;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import feri.count.it.R;
 
+
 public class MenuActivity extends AppCompatActivity {
 
     @Override
@@ -30,7 +32,6 @@ public class MenuActivity extends AppCompatActivity {
             getWindow().setStatusBarColor(getResources().getColor(R.color.maximum_blue));
         }
         getSupportActionBar().hide();
-
     }
 
     public void bindGui() {
