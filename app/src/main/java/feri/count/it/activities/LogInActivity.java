@@ -180,7 +180,7 @@ public class LogInActivity extends AppCompatActivity {
 
     //CHECKING IF INPUT FIELDS EXISTS IN LIST OF USERS
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    private User getUserIfIsRegisterred() {
+    public User getUserIfIsRegisterred() {
         final String hashedPassword = Hashing.sha256()
                 .hashString(edtPassword.getText().toString(), StandardCharsets.UTF_8)
                 .toString();

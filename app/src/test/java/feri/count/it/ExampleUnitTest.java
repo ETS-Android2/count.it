@@ -1,8 +1,20 @@
 package feri.count.it;
 
-import org.junit.Test;
+import android.content.Context;
+import android.view.View;
+import android.widget.EditText;
 
-import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import feri.count.datalib.User;
+import feri.count.it.activities.LogInActivity;
+
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.when;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -12,6 +24,6 @@ import static org.junit.Assert.*;
 public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
+        //assertEquals(4, 2 + 2);
     }
 }

@@ -15,8 +15,8 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import feri.count.it.BackUpService;
 import feri.count.it.R;
-
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -32,6 +32,7 @@ public class MenuActivity extends AppCompatActivity {
             getWindow().setStatusBarColor(getResources().getColor(R.color.maximum_blue));
         }
         getSupportActionBar().hide();
+        startService(new Intent( this, BackUpService.class )) ;
     }
 
     public void bindGui() {

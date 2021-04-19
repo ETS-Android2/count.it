@@ -46,8 +46,12 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     implementation 'androidx.navigation:navigation-runtime:2.3.4'
     testImplementation 'junit:junit:4.+'
+    testImplementation "com.google.truth:truth:0.40"
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    testImplementation "org.mockito:mockito-core:+"
+    androidTestImplementation "org.mockito:mockito-android:+"
+
     implementation platform('com.google.firebase:firebase-bom:26.7.0')
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-auth'
@@ -56,5 +60,4 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-auth:6.2.0'
     implementation 'com.firebaseui:firebase-ui-database:4.0.0'
     implementation 'com.google.guava:guava:30.1.1-android'
-//    compile 'com.android.support:design:22.2.1'
 }

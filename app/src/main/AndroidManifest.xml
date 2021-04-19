@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="feri.count.it">
 
-    <uses-permission android:name="android.premission.INTERNET" />
-
     <application
         android:name=".application.CountItApplication"
         android:allowBackup="true"
@@ -12,8 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Countit">
-        <activity android:name=".activities.MenuActivity" android:label="@string/title_activity_menu">
-        </activity>
+        <activity
+            android:name=".activities.MenuActivity"
+            android:label="@string/title_activity_menu"></activity>
 
         <activity android:name=".activities.LogInActivity">
             <intent-filter>
@@ -22,8 +21,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".activities.RegisterActivity" android:theme="@style/Theme.Countit" />
+        <activity
+            android:name=".activities.RegisterActivity"
+            android:theme="@style/Theme.Countit" />
+        <service
+            android:name=".BackUpService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
+
+    <uses-permission android:name="android.premission.INTERNET" />
 
 </manifest>
