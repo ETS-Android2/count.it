@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -19,6 +21,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -28,6 +33,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,6 +48,7 @@ import feri.count.it.R;
 import feri.count.it.activities.MenuActivity;
 import feri.count.it.adapters.EntryAdapter;
 import feri.count.it.application.CountItApplication;
+import feri.count.it.events.OnEntryAdd;
 import feri.count.it.modals.AddCustomModal;
 import feri.count.it.modals.FilterModal;
 import feri.count.it.modals.TagModal;
@@ -56,6 +66,7 @@ public class EntryFragment extends Fragment {
     private Button buttonRegister5;
     private FloatingActionButton fabAddCustom;
     private RecyclerView recyclerViewFood;
+    private String meal;
 
     private EntryAdapter entryAdapter;
 
@@ -63,6 +74,8 @@ public class EntryFragment extends Fragment {
     private FirebaseUser currentUser;
     private FirebaseAuth mAuth;
     private DatabaseReference db;
+    private DatabaseReference dbUsers;
+
 
     private ArrayList<User> listOfUsers = new ArrayList<>();
     private ArrayList<Entry> listOfEntries = new ArrayList<Entry>();
@@ -156,12 +169,38 @@ public class EntryFragment extends Fragment {
 
         this.app = (CountItApplication) getActivity().getApplication();
 
+
         bindGui(rootView);
 
         db = FirebaseDatabase.getInstance().getReference("entries");
+        dbUsers = FirebaseDatabase.getInstance().getReference();
 
         //getting firebase authentication
         mAuth = FirebaseAuth.getInstance();
+
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            String argument = "";
+            if (bundle.containsKey("meal"))
+                argument = bundle.getString("meal");
+
+            switch (argument){
+                case "Breakfast":
+                    isSelectedBreakfast = true;
+                    break;
+                case "Lunch":
+                    isSelectedLunch = true;
+                    break;
+                case "Dinner":
+                    isSelectedDinner = true;
+                    break;
+                case "Snack":
+                    isSelectedSnack = true;
+                    break;
+
+            }
+        }
+
 
         buttonSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -275,13 +314,51 @@ public class EntryFragment extends Fragment {
         modal.show(getFragmentManager(), AddCustomModal.TAG);
     }
 
+    private void getMealFromRadioButton(boolean bk, boolean ln, boolean dn, boolean sk){
+        if(bk)
+            meal = "Breakfast";
+        if(ln)
+            meal = "Lunch";
+        if(dn)
+            meal = "Dinner";
+        if(sk)
+            meal = "Snack";
+
+    }
+
+
     @Override
     public void onStart() {
         super.onStart();
+        EventBus.getDefault().register(this);
     }
 
     @Override
     public void onStop() {
         super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(OnEntryAdd event) {
+        getMealFromRadioButton(isSelectedBreakfast, isSelectedLunch, isSelectedDinner, isSelectedSnack);
+        event.entry.setMeal(meal);
+        User user = app.getLoggedUser();
+        user.addEntry(event.entry);
+        Task ref = dbUsers.child(User.COLLECTION).child(user.getId()).setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                //subject to change - on successful updating notify user with message
+                app.setLoggedUser(user);
+                Toast.makeText(getActivity(), "User data changed successfully!", Toast.LENGTH_SHORT).show();
+                Log.i(TAG,"New entry added");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getActivity(), "Something went wrong while saving user data...", Toast.LENGTH_SHORT).show();
+                Log.i(TAG,"entry not registered (FAILED!!!)");
+            }
+        });
     }
 }

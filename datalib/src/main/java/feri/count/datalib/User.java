@@ -144,4 +144,18 @@ public class User {
         return this.email.equals(user.getEmail()) && this.username.equals(user.getUsername());
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", weight=" + weight +
+                ", weightLoss=" + weightLoss +
+                ", dailyCalories=" + dailyCalories +
+                ", diet='" + diet + '\'' +
+                ", entries=" + entries +
+                '}';
+    }
 }
