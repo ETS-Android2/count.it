@@ -46,12 +46,15 @@ public class LogInActivityTest {
     @Test
     public void logInActivityTestFail()
     {
-        ViewInteraction appCompatEditText = onView( allOf(withId(R.id.edtEmailLog), childAtPosition( childAtPosition( withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")), 2), 4), isDisplayed()));
+        ViewInteraction appCompatEditText = onView( allOf(withId(R.id.edtEmailLog), childAtPosition( childAtPosition( withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")), 2),
+                4), isDisplayed()));
         appCompatEditText.perform(replaceText("goran@gmail.com"), closeSoftKeyboard());
-        ViewInteraction appCompatEditText2 = onView( allOf(withId(R.id.edtPassword), childAtPosition(childAtPosition( withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")), 2), 5), isDisplayed()));
+        ViewInteraction appCompatEditText2 = onView( allOf(withId(R.id.edtPassword), childAtPosition(childAtPosition( withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")), 2),
+                5), isDisplayed()));
         appCompatEditText2.perform(replaceText("password"), closeSoftKeyboard());
 
-        ViewInteraction materialButton = onView( allOf(withId(R.id.buttonLoginUser), withText("GO"), childAtPosition( childAtPosition(withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")), 2), 6), isDisplayed()));
+        ViewInteraction materialButton = onView( allOf(withId(R.id.buttonLoginUser), withText("GO"), childAtPosition( childAtPosition(withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")),
+                2), 6), isDisplayed()));
         materialButton.perform(click());
         //onView(withText("User does not exist!")).inRoot(withDecorView(not(is(getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
         //ViewInteraction toastMessageDisplayed = onView(withText("User does not exist!")).inRoot(new ToastMatcher()).check(matches(isDisplayed()));
@@ -62,20 +65,24 @@ public class LogInActivityTest {
     @Test
     public void logInActivityTestEmptyEmail()
     {
-        ViewInteraction appCompatEditText = onView(allOf(withId(R.id.edtPassword),childAtPosition(childAtPosition(withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")), 2), 5), isDisplayed()));
+        ViewInteraction appCompatEditText = onView(allOf(withId(R.id.edtPassword),childAtPosition(childAtPosition(withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")), 2),
+                5), isDisplayed()));
         appCompatEditText.perform(replaceText("password"), closeSoftKeyboard());
 
-        ViewInteraction materialButton = onView(allOf(withId(R.id.buttonLoginUser), withText("GO"), childAtPosition(childAtPosition(withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")), 2), 6), isDisplayed()));
+        ViewInteraction materialButton = onView(allOf(withId(R.id.buttonLoginUser), withText("GO"), childAtPosition(childAtPosition(withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")),
+                2), 6), isDisplayed()));
         materialButton.perform(click());
     }
 
     @Test
     public void logInActivityTestEmptyPassword()
     {
-        ViewInteraction appCompatEditText = onView(allOf(withId(R.id.edtEmailLog), childAtPosition(childAtPosition(withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")), 2), 4), isDisplayed()));
+        ViewInteraction appCompatEditText = onView(allOf(withId(R.id.edtEmailLog), childAtPosition(childAtPosition(withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")), 2),
+                4), isDisplayed()));
         appCompatEditText.perform(replaceText("viki@gmail.com"), closeSoftKeyboard());
 
-        ViewInteraction materialButton = onView(allOf(withId(R.id.buttonLoginUser), withText("GO"), childAtPosition(childAtPosition(withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")), 2), 6), isDisplayed()));
+        ViewInteraction materialButton = onView(allOf(withId(R.id.buttonLoginUser), withText("GO"), childAtPosition(childAtPosition(withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")),
+                2), 6), isDisplayed()));
         materialButton.perform(click());
     }
 
