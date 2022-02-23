@@ -11,7 +11,7 @@
 * [Contact](#contact)
 
 ## General info
-This project is made for the college subject.
+This project is made in a team for the college subject.
 
 ## Screenshots
 ![Example1](./screens/Screenshot_1.jpg)
