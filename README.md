@@ -28,7 +28,7 @@ Download the code and install via Android Studio.
 
 * Calorie statistics
 * Predefined and custom calorie entries
-* User settings (Diet, Weight)
+* User settings (diet type, weigth)
 
 ## Status
 Project is: _finished_
