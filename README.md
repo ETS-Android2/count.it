@@ -3,7 +3,7 @@
 
 ## Table of contents
 * [General info](#general-info)
-* [Screenshots](#screenshots)
+* [Demo](#demo)
 * [Technologies](#technologies)
 * [Setup](#setup)
 * [Features](#features)
@@ -13,10 +13,8 @@
 ## General info
 This project is made in a team for the college subject.
 
-## Screenshots
-![Example1](./screens/Screenshot_1.jpg)
-![Example2](./screens/Screenshot_2.jpg)
-![Example3](./screens/Screenshot_3.jpg)
+## Demo
+![Demo](project.gif)
 
 
 ## Technologies
